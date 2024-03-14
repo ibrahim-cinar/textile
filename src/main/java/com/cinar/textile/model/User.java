@@ -24,6 +24,7 @@ public class User extends BaseEntity implements UserDetails {
     private String lastName;
     @Email(message = "Please provide a valid email address")
     @NotBlank(message = "Please provide an email address")
+    @Column(unique = true)
     private String email;
     @NotBlank(message = "Please provide a password")
     private String password;
@@ -37,6 +38,17 @@ public class User extends BaseEntity implements UserDetails {
     @Column(name = "authority", nullable = false)
     @Enumerated(EnumType.STRING)
     private List<Role> authorities;
+
+    public User(String firstName, String lastName, String email, String password, String phoneNumber, List<Role> authorities) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.authorities = authorities;
+    }
+
+
 
     @Override
     public String getUsername() {

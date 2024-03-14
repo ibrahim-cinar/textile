@@ -36,4 +36,20 @@ public class GeneralExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<?> ExceptionHandler(Exception exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<?> ExceptionHandler(UserNotFoundException userNotFoundException) {
+        return new ResponseEntity<>(userNotFoundException.getMessage(), HttpStatus.NOT_FOUND);
+    }//InvalidInputException
+    @ExceptionHandler(InvalidInputException.class)
+    public ResponseEntity<?> ExceptionHandler(InvalidInputException invalidInputException) {
+        return new ResponseEntity<>(invalidInputException.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(PasswordNotMatchException.class)
+    public ResponseEntity<?> ExceptionHandler(PasswordNotMatchException passwordNotMatchException) {
+        return new ResponseEntity<>(passwordNotMatchException.getMessage(), HttpStatus.NOT_FOUND);
+    }
+    @ExceptionHandler(WrongPasswordException.class)
+    public ResponseEntity<?> ExceptionHandler(WrongPasswordException wrongPasswordException) {
+        return new ResponseEntity<>(wrongPasswordException.getMessage(), HttpStatus.NOT_FOUND);
+    }
 }

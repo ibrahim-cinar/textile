@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import com.cinar.textile.model.Role;
+import java.util.List;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -15,4 +18,5 @@ public class UserDto {
     private String lastName;
     private String email;
     private String phoneNumber;
+    private List<Role> authorities;
 }

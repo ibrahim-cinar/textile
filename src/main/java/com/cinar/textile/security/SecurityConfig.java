@@ -39,7 +39,12 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/v1/api/auth/**").permitAll())
+                        .requestMatchers("/v1/api/auth/**",
+                                "/v1/api/user/users",
+                                "/swagger-ui/index.html",
+                                "/v3/api-docs/**",
+                                "/swagger-ui/**")
+                        .permitAll())
                 .authorizeHttpRequests(x ->
                         x//requestMatchers("/v1/api/user/update/{email}").hasRole("SUPER_ADMIN")
                                 .requestMatchers("/v1/api/user/create","/v1/api/user/all","/v1/api/user/email/{email}").hasAnyRole("ADMIN")

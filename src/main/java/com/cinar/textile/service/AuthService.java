@@ -128,7 +128,7 @@ public class AuthService {
                 var accessToken =jwtService.generateToken(user);
                 revokeAllUserTokens(user);
                 savedUserToken(user, accessToken);
-                var authResponse = JwtAuthenticationResponse.builder().accessToken(accessToken).refreshToken(refreshToken).build();
+                var authResponse = JwtAuthenticationResponse.builder().user(modelMapper.map(user, UserDto.class)).accessToken(accessToken).refreshToken(refreshToken).build();
                 new ObjectMapper().writeValue(response.getOutputStream(),authResponse);
             }
         }

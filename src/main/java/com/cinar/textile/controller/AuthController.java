@@ -4,10 +4,12 @@ import com.cinar.textile.dto.request.SignInRequest;
 import com.cinar.textile.dto.request.SignUpRequest;
 import com.cinar.textile.dto.response.JwtAuthenticationResponse;
 import com.cinar.textile.service.AuthService;
+import com.cinar.textile.service.LogoutService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,11 +23,13 @@ import java.io.IOException;
 public class AuthController {
 
     private final AuthService authService;
+    private final LogoutService logoutService;
 
-    public AuthController(AuthService authService) {
+    public AuthController(AuthService authService, LogoutService logoutService) {
 
 
         this.authService = authService;
+        this.logoutService = logoutService;
     }
 
     @PostMapping("/signup")
@@ -39,6 +43,11 @@ public class AuthController {
     @PostMapping("/refresh")
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
         authService.refreshToken(request, response);
+    }
+    @PostMapping("/logout")
+    public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
+        logoutService.logout(request, response, authentication);
+
     }
 
 

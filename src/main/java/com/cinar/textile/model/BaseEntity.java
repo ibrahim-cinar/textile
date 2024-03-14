@@ -38,7 +38,4 @@ public class BaseEntity {
     @Column(name = "updated_by")
     private String updatedBy;
 
-    public BaseEntity(String createdBy) {
-        this.createdBy = createdBy;
-    }
 }
